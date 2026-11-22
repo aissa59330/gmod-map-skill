@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: props-supprimes-vbsp
+expected_outcome: |
+  fix.md explique que ces modèles HL2 sont réservés aux entités physiques (prop_data sans allowstatic), propose de les remplacer, d'ajouter un contrôle automatique des modèles avant placement et de relire les lignes Deleted après chaque compilation.

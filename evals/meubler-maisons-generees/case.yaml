@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: meubler-maisons-generees
+expected_outcome: |
+  plan.md est un plan concret qui recense d'abord les bâtiments et le montre avant de modifier, garde les maisons et le décor extérieur à la même place, valide chaque meuble et l'accès aux pièces, prévoit de vrais escaliers, tient compte du coût en plans des brushes ajoutés et finit par une vérification visuelle.
