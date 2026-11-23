@@ -218,21 +218,14 @@ Workshop, note de mise à jour en ASCII. Tout le détail (gmad / gmpublish, desc
 - Tenir un journal d'itérations (`logs/iterations.md`) et un document de narration pour les organisateurs.
 
 ## 10. Erreurs à ne pas refaire (vécu Jabiim, v23 → v28)
-**Méthode**
-- **Une zone à la fois, validée en photo**, plutôt que 5 grosses passes en une soirée : la v28 (relief + optimisation +
-  ville + industrie + front d'un coup) compilait sans trou mais l'utilisateur l'a jugée « brouillon » et est revenu à la v27.
-  Qualité visuelle d'un lieu > nombre de fonctionnalités. Demander 2-3 images de référence avant une refonte.
-- **Grosse refonte = nouvelle conversation** (la mémoire du projet garde l'essentiel) : une conversation trop longue
-  empile les retouches sans vue d'ensemble.
-- **Commiter avant toute expérience** (code externe, refonte) : un test interrompu peut avoir déjà réécrit le générateur
-  et le VMF. Code venu d'une autre IA : `diff --strip-trailing-cr` d'abord, n'en garder que les bonnes idées.
-- « La version précédente » est ambigu : demander laquelle (v27 ? v22 ?) avant une compilation d'une heure.
-- Ne pas retirer un élément aimé (montagnes du contour) sur une demande vague : l'utilisateur a changé d'avis ensuite.
 **Budget de plans (la vraie limite)**
 - ~60 % des plans viennent des brushes **obliques** (bâtiments tournés, sacs de sable en arc, routes goudronnées inclinées,
   cylindres) : chaque brush oblique ajoute aussi des plans de biseau. Mesurer avec un **vbsp seul sur une copie du VMF**
   (`tools/plans_bsp.ps1`, lump 1 du BSP / 20) avant toute compilation complète. Routes : terrain peint, goudron seulement
   en ville (96,7 % → 87,7 %). Petits bâtiments de remplissage : murs axiaux, toits plats, coordonnées sur une grille.
+- Piste à creuser : **modéliser les maisons dans Blender** (ou un autre modeleur) et les compiler en modèles (.mdl,
+  props statiques) au lieu de brushes : zéro plan, et des formes plus riches (toits, auvents, corniches) qu'une boîte
+  de brushes. Garder en brushes seulement ce qui doit bloquer la visibilité ou servir d'intérieur explorable.
 **Terrain**
 - La texture du sol est choisie **par dalle de 1024** : jamais de régions bruitées à petite échelle (< ~1500) ni de texture
   non « blend » au milieu d'une autre → damier de carrés. Les variations fines passent par l'alpha (peinture).
