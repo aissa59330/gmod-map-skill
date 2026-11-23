@@ -57,3 +57,11 @@ versions, rien d'autre de lourd sur le PC. Détails, pièges et conseils pour le
 - Piste à creuser : **modéliser les maisons dans Blender** (ou un autre modeleur) et les compiler en modèles (.mdl,
   props statiques) au lieu de brushes : zéro plan, et des formes plus riches (toits, auvents, corniches) qu'une boîte
   de brushes. Garder en brushes seulement ce qui doit bloquer la visibilité ou servir d'intérieur explorable.
+
+## Outils de la refonte v2 (testés)
+- `tools/budget.py <map.vmf> [--zones zones.json]` : AVANT compilation, plans uniques et part de brushes obliques par
+  zone + estimation des plans du BSP (indicateur, étalonné sur Jabiim : ×5,1 à 5,5). Test : 40 blocs tournés = 160 plans
+  contre 84 pour 40 blocs droits.
+- `tools/audit_bsp.py <map.bsp> [--compare ancien.bsp] [--json r.json]` : APRÈS compilation, MESURE des limites (plans,
+  sommets, faces, brushes, côtés, texinfo, matériaux, modèles, feuilles, overlays), entités, props statiques (fondus),
+  cubemaps, lumières (nommées), visibilité, lightmaps, + 3 corrections prioritaires. Ce ne sont jamais des FPS.
