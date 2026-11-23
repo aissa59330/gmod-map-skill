@@ -195,6 +195,10 @@ check_server, photos_jeu, static_ok), addons `jb_check`, `jb_photos`.
 2. **Rien n'a bougé sans le vouloir** : positions des bâtiments identiques avant / après (recensement), sinon expliquer.
 3. **Compilation** : pas de leak ; lire dans le log vbsp les lignes `Deleted` (props supprimés) et `planes` (viser < 90 %).
 4. **Trous de collision** : `tools/check_server.ps1` (addon `jb_check`, serveur dédié local fenêtre réduite) → 0 trou, 0 chute.
+   Les ouvertures VOULUES (puits vers des cavernes) sont exclues de jb_check et contrôlées à part : rayons à travers
+   chaque puits qui listent les couches traversées (addon `jb_puits`) → le fond doit être atteint. Vécu : un monde
+   décalé (cavernes à -3840) dont le `carve` n'était pas décalé laissait un plafond plein à -1584 dans les 3 puits,
+   invisible pour jb_check (les rampes arrêtaient ses rayons) pendant des versions entières.
 5. **Images** : vues en plan / Blender, puis photos en jeu (`tools/photos_jeu.ps1`) aux endroits modifiés ; refaire toute
    vue noire ou mal cadrée.
 6. **Compte rendu** : ce qui est vérifié, ce qui ne l'est pas, ce que l'utilisateur doit tester lui-même en jeu.
@@ -212,3 +216,34 @@ Workshop, note de mise à jour en ASCII. Tout le détail (gmad / gmpublish, desc
 - Réponses courtes, dans la langue de l'utilisateur (en français s'il écrit en français, y compris les tableaux) ; commandes prêtes à copier ; jamais prétendre avoir vérifié en jeu ce qui ne l'a pas été.
 - Respecter les limites de quota/budget données par l'utilisateur (vérifier l'usage régulièrement).
 - Tenir un journal d'itérations (`logs/iterations.md`) et un document de narration pour les organisateurs.
+
+## 10. Erreurs à ne pas refaire (vécu Jabiim, v23 → v28)
+**Méthode**
+- **Une zone à la fois, validée en photo**, plutôt que 5 grosses passes en une soirée : la v28 (relief + optimisation +
+  ville + industrie + front d'un coup) compilait sans trou mais l'utilisateur l'a jugée « brouillon » et est revenu à la v27.
+  Qualité visuelle d'un lieu > nombre de fonctionnalités. Demander 2-3 images de référence avant une refonte.
+- **Grosse refonte = nouvelle conversation** (la mémoire du projet garde l'essentiel) : une conversation trop longue
+  empile les retouches sans vue d'ensemble.
+- **Commiter avant toute expérience** (code externe, refonte) : un test interrompu peut avoir déjà réécrit le générateur
+  et le VMF. Code venu d'une autre IA : `diff --strip-trailing-cr` d'abord, n'en garder que les bonnes idées.
+- « La version précédente » est ambigu : demander laquelle (v27 ? v22 ?) avant une compilation d'une heure.
+- Ne pas retirer un élément aimé (montagnes du contour) sur une demande vague : l'utilisateur a changé d'avis ensuite.
+**Budget de plans (la vraie limite)**
+- ~60 % des plans viennent des brushes **obliques** (bâtiments tournés, sacs de sable en arc, routes goudronnées inclinées,
+  cylindres) : chaque brush oblique ajoute aussi des plans de biseau. Mesurer avec un **vbsp seul sur une copie du VMF**
+  (`tools/plans_bsp.ps1`, lump 1 du BSP / 20) avant toute compilation complète. Routes : terrain peint, goudron seulement
+  en ville (96,7 % → 87,7 %). Petits bâtiments de remplissage : murs axiaux, toits plats, coordonnées sur une grille.
+**Terrain**
+- La texture du sol est choisie **par dalle de 1024** : jamais de régions bruitées à petite échelle (< ~1500) ni de texture
+  non « blend » au milieu d'une autre → damier de carrés. Les variations fines passent par l'alpha (peinture).
+- Un relief se fait avec le terrain (coût en plans quasi nul) ; une rivière = tracé au plus bas (Dijkstra sur la carte de
+  hauteur en évitant les lieux), lit à altitude lissée, berges d'autant plus larges que le terrain est haut, gués aux
+  croisements de routes ; l'enregistrer comme « piste » pour que rien ne s'y pose.
+- Un mur coplanaire à un bloqueur nodraw du terrain devient invisible : le décaler à l'intérieur de la dalle percée.
+**Génération**
+- Toute nouvelle fonction tire dans son propre aléa (`IN.srng("nom")`), jamais dans le `R` global : sinon tout le reste
+  de la map bouge.
+- Vérifier le drapeau `static` (prop_bounds) avant d'utiliser un modèle : un modèle dynamique est refusé (clôtures en bois).
+- Une ville « sombre » ne vient pas de `vrad -fast` : il manque des lumières (carrefours, places, façades).
+- Remplissage des vides : disque de Poisson + test « déjà encombré » ; des boîtes nues isolées font plus vide que du vide —
+  les habiller (abords, clôtures, caisses) ou mettre des avant-postes en props.
