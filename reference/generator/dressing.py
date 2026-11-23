@@ -19,7 +19,8 @@ import walk
 from geom import Block
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-PB = json.load(open(os.path.join(HERE, "prop_bounds_packs.json"), encoding="utf-8"))
+_PB = os.path.join(HERE, "prop_bounds_packs.json")   # tailles des props des packs : à régénérer avec tools/model_bounds.py
+PB = json.load(open(_PB, encoding="utf-8")) if os.path.exists(_PB) else {}
 
 LT = "models/lordtrilobite/starwars/"
 KP = "models/kingpommes/starwars/"

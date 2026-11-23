@@ -1,0 +1,1159 @@
+{
+ "models/props_vehicles/car002a.mdl": {
+  "min": [
+   -79.6,
+   -37.8,
+   -23.8
+  ],
+  "max": [
+   72.7,
+   37.9,
+   33.9
+  ],
+  "static": true
+ },
+ "models/props_vehicles/car003a.mdl": {
+  "min": [
+   -101.1,
+   -44.2,
+   -22.7
+  ],
+  "max": [
+   81.6,
+   39.3,
+   39.0
+  ],
+  "static": true
+ },
+ "models/props_vehicles/car004a.mdl": {
+  "min": [
+   -113.8,
+   -43.4,
+   -25.0
+  ],
+  "max": [
+   89.1,
+   42.8,
+   36.6
+  ],
+  "static": true
+ },
+ "models/props_vehicles/car005a.mdl": {
+  "min": [
+   -105.9,
+   -44.3,
+   -26.3
+  ],
+  "max": [
+   81.3,
+   39.4,
+   39.7
+  ],
+  "static": true
+ },
+ "models/props_vehicles/car001b_hatchback.mdl": {
+  "min": [
+   -77.4,
+   -40.6,
+   -23.4
+  ],
+  "max": [
+   79.1,
+   40.2,
+   23.3
+  ],
+  "static": true
+ },
+ "models/props_vehicles/truck001a.mdl": {
+  "min": [
+   -119.7,
+   -47.0,
+   -59.6
+  ],
+  "max": [
+   123.4,
+   50.3,
+   38.0
+  ],
+  "static": true
+ },
+ "models/props_vehicles/truck003a.mdl": {
+  "min": [
+   -138.1,
+   -61.8,
+   -59.2
+  ],
+  "max": [
+   154.8,
+   61.4,
+   72.1
+  ],
+  "static": true
+ },
+ "models/props_vehicles/van001a.mdl": {
+  "min": [
+   -127.5,
+   -65.2,
+   -34.7
+  ],
+  "max": [
+   98.7,
+   49.8,
+   49.1
+  ],
+  "static": true
+ },
+ "models/props_vehicles/trailer002a.mdl": {
+  "min": [
+   -104.1,
+   -47.2,
+   -46.1
+  ],
+  "max": [
+   106.3,
+   46.5,
+   44.9
+  ],
+  "static": true
+ },
+ "models/props_vehicles/apc001.mdl": {
+  "min": [
+   -65.3,
+   -174.8,
+   -48.0
+  ],
+  "max": [
+   65.3,
+   153.3,
+   164.9
+  ],
+  "static": true
+ },
+ "models/props_vehicles/wagon001a.mdl": {
+  "min": [
+   -47.1,
+   -39.2,
+   -29.3
+  ],
+  "max": [
+   47.1,
+   39.6,
+   30.7
+  ],
+  "static": true
+ },
+ "models/props_vehicles/tanker001a.mdl": {
+  "min": [
+   -525.6,
+   -81.9,
+   -78.9
+  ],
+  "max": [
+   9.9,
+   122.6,
+   64.9
+  ],
+  "static": true
+ },
+ "models/props_vehicles/generatortrailer01.mdl": {
+  "min": [
+   -67.6,
+   -31.3,
+   -0.2
+  ],
+  "max": [
+   64.9,
+   31.3,
+   77.6
+  ],
+  "static": true
+ },
+ "models/props_c17/traffic_light001a.mdl": {
+  "min": [
+   -11.0,
+   -11.0,
+   -20.3
+  ],
+  "max": [
+   11.0,
+   11.0,
+   20.3
+  ],
+  "static": true
+ },
+ "models/props_c17/utilitypole01a.mdl": {
+  "min": [
+   -5.2,
+   -47.7,
+   -0.3
+  ],
+  "max": [
+   22.8,
+   46.9,
+   487.0
+  ],
+  "static": true
+ },
+ "models/props_c17/streetsign004e.mdl": {
+  "min": [
+   -12.1,
+   -0.4,
+   -12.1
+  ],
+  "max": [
+   12.1,
+   0.4,
+   12.1
+  ],
+  "static": true
+ },
+ "models/props_c17/lamppost03a_off.mdl": {
+  "min": [
+   -10.1,
+   -10.1,
+   -0.1
+  ],
+  "max": [
+   10.1,
+   105.8,
+   450.3
+  ],
+  "static": true
+ },
+ "models/props_c17/bench01a.mdl": {
+  "min": [
+   -12.0,
+   -38.1,
+   -19.8
+  ],
+  "max": [
+   11.7,
+   38.0,
+   19.9
+  ],
+  "static": true
+ },
+ "models/props_c17/fence01a.mdl": {
+  "min": [
+   -2.6,
+   -67.3,
+   -54.4
+  ],
+  "max": [
+   2.2,
+   67.3,
+   54.4
+  ],
+  "static": true
+ },
+ "models/props_c17/fence03a.mdl": {
+  "min": [
+   -2.6,
+   -130.4,
+   -54.4
+  ],
+  "max": [
+   2.2,
+   130.4,
+   54.4
+  ],
+  "static": true
+ },
+ "models/props_c17/concrete_barrier001a.mdl": {
+  "min": [
+   -10.5,
+   -56.3,
+   -0.5
+  ],
+  "max": [
+   10.5,
+   56.3,
+   48.4
+  ],
+  "static": true
+ },
+ "models/props_c17/furniturestove001a.mdl": {
+  "min": [
+   -17.7,
+   -27.0,
+   -20.3
+  ],
+  "max": [
+   17.7,
+   26.3,
+   20.2
+  ],
+  "static": true
+ },
+ "models/props_junk/trashdumpster01a.mdl": {
+  "min": [
+   -26.4,
+   -37.1,
+   -26.7
+  ],
+  "max": [
+   26.1,
+   37.0,
+   27.0
+  ],
+  "static": true
+ },
+ "models/props_junk/trashbin01a.mdl": {
+  "min": [
+   -13.3,
+   -12.1,
+   -20.3
+  ],
+  "max": [
+   13.3,
+   12.1,
+   20.4
+  ],
+  "static": true
+ },
+ "models/props_junk/wood_crate001a.mdl": {
+  "min": [
+   -20.3,
+   -20.2,
+   -20.2
+  ],
+  "max": [
+   20.2,
+   20.2,
+   20.0
+  ],
+  "static": true
+ },
+ "models/props_junk/wood_crate002a.mdl": {
+  "min": [
+   -20.3,
+   -34.5,
+   -20.3
+  ],
+  "max": [
+   20.3,
+   34.3,
+   20.2
+  ],
+  "static": true
+ },
+ "models/props_junk/wood_pallet001a.mdl": {
+  "min": [
+   -33.0,
+   -37.8,
+   -4.6
+  ],
+  "max": [
+   33.1,
+   37.8,
+   4.0
+  ],
+  "static": true
+ },
+ "models/props_junk/trafficcone001a.mdl": {
+  "min": [
+   -8.5,
+   -8.3,
+   -15.2
+  ],
+  "max": [
+   8.5,
+   8.3,
+   15.3
+  ],
+  "static": true
+ },
+ "models/props_junk/pushcart01a.mdl": {
+  "min": [
+   -38.0,
+   -23.0,
+   -34.1
+  ],
+  "max": [
+   43.1,
+   23.0,
+   34.8
+  ],
+  "static": true
+ },
+ "models/props_foliage/tree_deciduous_01a.mdl": {
+  "min": [
+   -189.4,
+   -213.5,
+   -0.4
+  ],
+  "max": [
+   164.8,
+   164.5,
+   436.3
+  ],
+  "static": true
+ },
+ "models/props_foliage/tree_deciduous_02a.mdl": {
+  "min": [
+   -284.3,
+   -77.1,
+   -2.6
+  ],
+  "max": [
+   221.9,
+   393.0,
+   536.2
+  ],
+  "static": true
+ },
+ "models/props_foliage/tree_deciduous_03a.mdl": {
+  "min": [
+   -74.8,
+   -74.7,
+   -2.6
+  ],
+  "max": [
+   83.7,
+   126.4,
+   249.7
+  ],
+  "static": true
+ },
+ "models/props_foliage/tree_poplar_01.mdl": {
+  "min": [
+   -122.7,
+   -147.6,
+   -1.4
+  ],
+  "max": [
+   183.9,
+   131.9,
+   1119.4
+  ],
+  "static": true
+ },
+ "models/props_foliage/oak_tree01.mdl": {
+  "min": [
+   -708.6,
+   -625.1,
+   -13.3
+  ],
+  "max": [
+   585.1,
+   532.0,
+   1183.5
+  ],
+  "static": true
+ },
+ "models/props_foliage/shrub_01a.mdl": {
+  "min": [
+   -47.9,
+   -35.5,
+   -1.6
+  ],
+  "max": [
+   34.6,
+   30.2,
+   70.0
+  ],
+  "static": true
+ },
+ "models/props_foliage/tree_cliff_01a.mdl": {
+  "min": [
+   -142.5,
+   -253.1,
+   -142.5
+  ],
+  "max": [
+   294.9,
+   178.0,
+   591.4
+  ],
+  "static": true
+ },
+ "models/props_wasteland/wood_fence01a.mdl": {
+  "min": [
+   -64.6,
+   -2.3,
+   -68.2
+  ],
+  "max": [
+   64.1,
+   2.2,
+   68.5
+  ],
+  "static": false
+ },
+ "models/props_wasteland/wood_fence02a.mdl": {
+  "min": [
+   -32.5,
+   -1.8,
+   -68.2
+  ],
+  "max": [
+   32.4,
+   1.8,
+   68.8
+  ],
+  "static": true
+ },
+ "models/props_wasteland/rockgranite02a.mdl": {
+  "min": [
+   -43.1,
+   -31.6,
+   -25.4
+  ],
+  "max": [
+   46.8,
+   29.7,
+   28.8
+  ],
+  "static": true
+ },
+ "models/props_wasteland/rockgranite03b.mdl": {
+  "min": [
+   -15.8,
+   -13.6,
+   -18.8
+  ],
+  "max": [
+   15.8,
+   13.6,
+   18.8
+  ],
+  "static": true
+ },
+ "models/props_wasteland/rockcliff01b.mdl": {
+  "min": [
+   -51.7,
+   -41.4,
+   -86.8
+  ],
+  "max": [
+   51.7,
+   41.4,
+   86.8
+  ],
+  "static": true
+ },
+ "models/props_wasteland/rockcliff_cluster02a.mdl": {
+  "min": [
+   -244.0,
+   -273.0,
+   -270.0
+  ],
+  "max": [
+   220.9,
+   303.2,
+   267.3
+  ],
+  "static": true
+ },
+ "models/props_wasteland/cargo_container01.mdl": {
+  "min": [
+   -66.3,
+   -192.1,
+   -61.4
+  ],
+  "max": [
+   66.3,
+   195.4,
+   68.4
+  ],
+  "static": true
+ },
+ "models/props_wasteland/barricade001a.mdl": {
+  "min": [
+   -18.4,
+   -18.0,
+   -20.0
+  ],
+  "max": [
+   18.4,
+   18.0,
+   22.4
+  ],
+  "static": true
+ },
+ "models/props_wasteland/barricade002a.mdl": {
+  "min": [
+   -32.4,
+   -16.4,
+   -32.3
+  ],
+  "max": [
+   32.4,
+   18.3,
+   32.3
+  ],
+  "static": true
+ },
+ "models/props_wasteland/medbridge_post01.mdl": {
+  "min": [
+   -16.3,
+   -16.3,
+   -0.3
+  ],
+  "max": [
+   16.3,
+   16.3,
+   104.3
+  ],
+  "static": true
+ },
+ "models/props_wasteland/laundry_cart001.mdl": {
+  "min": [
+   -54.5,
+   -23.5,
+   -19.8
+  ],
+  "max": [
+   54.0,
+   23.5,
+   19.7
+  ],
+  "static": true
+ },
+ "models/props_wasteland/horizontalcoolingtank04.mdl": {
+  "min": [
+   -157.6,
+   -48.6,
+   -60.7
+  ],
+  "max": [
+   158.7,
+   48.7,
+   61.1
+  ],
+  "static": true
+ },
+ "models/props_wasteland/coolingtank02.mdl": {
+  "min": [
+   -58.7,
+   -51.2,
+   -200.8
+  ],
+  "max": [
+   54.1,
+   50.2,
+   210.6
+  ],
+  "static": true
+ },
+ "models/props_wasteland/kitchen_counter001a.mdl": {
+  "min": [
+   -32.6,
+   -32.3,
+   -20.3
+  ],
+  "max": [
+   32.7,
+   32.3,
+   20.3
+  ],
+  "static": true
+ },
+ "models/props_wasteland/prison_bedframe001a.mdl": {
+  "min": [
+   -45.6,
+   -19.5,
+   -15.1
+  ],
+  "max": [
+   46.0,
+   20.1,
+   15.3
+  ],
+  "static": true
+ },
+ "models/props_c17/substation_transformer01a.mdl": {
+  "min": [
+   -78.2,
+   -119.6,
+   -75.8
+  ],
+  "max": [
+   79.0,
+   119.6,
+   75.8
+  ],
+  "static": true
+ },
+ "models/props_c17/oildrum001.mdl": {
+  "min": [
+   -14.5,
+   -14.5,
+   -0.3
+  ],
+  "max": [
+   14.5,
+   14.5,
+   45.3
+  ],
+  "static": true
+ },
+ "models/props_borealis/bluebarrel001.mdl": {
+  "min": [
+   -14.4,
+   -14.4,
+   -25.9
+  ],
+  "max": [
+   14.4,
+   14.4,
+   26.0
+  ],
+  "static": true
+ },
+ "models/props_buildings/watertower_001a.mdl": {
+  "min": [
+   -195.7,
+   -202.7,
+   -822.4
+  ],
+  "max": [
+   198.5,
+   200.6,
+   854.7
+  ],
+  "static": true
+ },
+ "models/props_combine/combine_mortar01a.mdl": {
+  "min": [
+   -21.6,
+   -21.9,
+   -1.1
+  ],
+  "max": [
+   31.1,
+   21.9,
+   154.2
+  ],
+  "static": true
+ },
+ "models/props_combine/combinetower001.mdl": {
+  "min": [
+   -103.0,
+   -141.1,
+   -273.8
+  ],
+  "max": [
+   122.8,
+   142.4,
+   274.9
+  ],
+  "static": true
+ },
+ "models/props_combine/combine_barricade_short01a.mdl": {
+  "min": [
+   -9.1,
+   -32.6,
+   -30.3
+  ],
+  "max": [
+   9.3,
+   32.6,
+   18.0
+  ],
+  "static": true
+ },
+ "models/props_combine/combine_barricade_med02a.mdl": {
+  "min": [
+   -71.0,
+   -64.5,
+   -31.0
+  ],
+  "max": [
+   70.6,
+   64.5,
+   101.4
+  ],
+  "static": true
+ },
+ "models/props_combine/combine_fence01a.mdl": {
+  "min": [
+   -4.9,
+   -56.9,
+   -40.2
+  ],
+  "max": [
+   22.3,
+   4.5,
+   152.1
+  ],
+  "static": true
+ },
+ "models/props_combine/combine_light001a.mdl": {
+  "min": [
+   -18.8,
+   -11.6,
+   -3.8
+  ],
+  "max": [
+   16.6,
+   11.6,
+   42.3
+  ],
+  "static": true
+ },
+ "models/props_combine/combine_monitorbay.mdl": {
+  "min": [
+   -41.1,
+   -99.5,
+   -53.8
+  ],
+  "max": [
+   39.7,
+   131.5,
+   65.3
+  ],
+  "static": true
+ },
+ "models/props_combine/combine_interface001.mdl": {
+  "min": [
+   -26.4,
+   -42.0,
+   -0.3
+  ],
+  "max": [
+   26.0,
+   41.5,
+   61.5
+  ],
+  "static": true
+ },
+ "models/props_combine/weaponstripper.mdl": {
+  "min": [
+   -15.1,
+   -64.3,
+   -0.3
+  ],
+  "max": [
+   19.1,
+   64.3,
+   128.9
+  ],
+  "static": true
+ },
+ "models/props_combine/combinecrane002.mdl": {
+  "min": [
+   -51.0,
+   -64.5,
+   -257.0
+  ],
+  "max": [
+   52.2,
+   63.4,
+   256.6
+  ],
+  "static": true
+ },
+ "models/props_combine/combine_generator01.mdl": {
+  "min": [
+   -38.0,
+   -34.3,
+   -96.2
+  ],
+  "max": [
+   20.9,
+   34.3,
+   96.2
+  ],
+  "static": true
+ },
+ "models/props_combine/headcrabcannister01a.mdl": {
+  "min": [
+   -66.5,
+   -21.3,
+   -21.3
+  ],
+  "max": [
+   66.5,
+   21.3,
+   21.3
+  ],
+  "static": true
+ },
+ "models/props_combine/combinethumper002.mdl": {
+  "min": [
+   -21.4,
+   -64.3,
+   -0.3
+  ],
+  "max": [
+   43.5,
+   27.7,
+   337.7
+  ],
+  "static": false
+ },
+ "models/props_lab/servers.mdl": {
+  "min": [
+   -13.6,
+   -47.3,
+   -0.3
+  ],
+  "max": [
+   15.4,
+   46.3,
+   101.3
+  ],
+  "static": true
+ },
+ "models/props_lab/generatorconsole.mdl": {
+  "min": [
+   -51.6,
+   -27.7,
+   -0.5
+  ],
+  "max": [
+   51.9,
+   28.1,
+   49.4
+  ],
+  "static": true
+ },
+ "models/props_rooftop/antennaclusters01a.mdl": {
+  "min": [
+   -80.2,
+   -104.5,
+   -67.0
+  ],
+  "max": [
+   80.1,
+   104.5,
+   66.4
+  ],
+  "static": true
+ },
+ "models/props_rooftop/roof_vent001.mdl": {
+  "min": [
+   -8.0,
+   -8.0,
+   -0.3
+  ],
+  "max": [
+   8.0,
+   8.0,
+   43.3
+  ],
+  "static": true
+ },
+ "models/props_rooftop/satellitedish02.mdl": {
+  "min": [
+   -15.8,
+   -18.3,
+   -20.4
+  ],
+  "max": [
+   15.6,
+   18.1,
+   20.1
+  ],
+  "static": true
+ },
+ "models/props_rooftop/chimneypipe_cluster02a.mdl": {
+  "min": [
+   -14.2,
+   -59.4,
+   -70.1
+  ],
+  "max": [
+   14.2,
+   59.6,
+   70.1
+  ],
+  "static": true
+ },
+ "models/props_trainstation/benchoutdoor01a.mdl": {
+  "min": [
+   -11.8,
+   -49.3,
+   -11.6
+  ],
+  "max": [
+   11.9,
+   49.2,
+   4.9
+  ],
+  "static": true
+ },
+ "models/props_trainstation/trashcan_indoor001a.mdl": {
+  "min": [
+   -18.1,
+   -18.1,
+   -20.3
+  ],
+  "max": [
+   18.1,
+   18.1,
+   35.5
+  ],
+  "static": true
+ },
+ "models/props_debris/concrete_debris256pile001a.mdl": {
+  "min": [
+   -128.2,
+   -125.0,
+   -20.6
+  ],
+  "max": [
+   112.8,
+   128.3,
+   29.3
+  ],
+  "static": true
+ },
+ "models/props_debris/concrete_wallpile01a.mdl": {
+  "min": [
+   -73.1,
+   -41.6,
+   -31.9
+  ],
+  "max": [
+   73.4,
+   41.6,
+   9.6
+  ],
+  "static": true
+ },
+ "models/props_debris/walldestroyed03a.mdl": {
+  "min": [
+   -135.3,
+   -11.2,
+   -64.2
+  ],
+  "max": [
+   134.6,
+   13.8,
+   74.6
+  ],
+  "static": true
+ },
+ "models/props_c17/furnituretable001a.mdl": {
+  "min": [
+   -24.2,
+   -24.9,
+   -18.2
+  ],
+  "max": [
+   25.4,
+   24.2,
+   18.8
+  ],
+  "static": true
+ },
+ "models/props_c17/furniturecouch001a.mdl": {
+  "min": [
+   -22.6,
+   -38.6,
+   -16.9
+  ],
+  "max": [
+   22.7,
+   38.8,
+   16.1
+  ],
+  "static": true
+ },
+ "models/props_c17/furnitureshelf001a.mdl": {
+  "min": [
+   -8.6,
+   -23.1,
+   -43.5
+  ],
+  "max": [
+   8.6,
+   23.1,
+   43.5
+  ],
+  "static": true
+ },
+ "models/props_interiors/furniture_couch01a.mdl": {
+  "min": [
+   -21.4,
+   -39.0,
+   -21.6
+  ],
+  "max": [
+   18.5,
+   39.0,
+   21.6
+  ],
+  "static": true
+ },
+ "models/props_c17/shelfunit01a.mdl": {
+  "min": [
+   -39.5,
+   -10.5,
+   0.0
+  ],
+  "max": [
+   39.5,
+   10.5,
+   93.1
+  ],
+  "static": true
+ },
+ "models/props_canal/generator01.mdl": {
+  "min": [
+   -113.6,
+   -121.8,
+   -73.4
+  ],
+  "max": [
+   113.6,
+   121.6,
+   72.7
+  ],
+  "static": true
+ },
+ "models/props_lab/lockers.mdl": {
+  "min": [
+   -11.3,
+   -24.3,
+   -0.3
+  ],
+  "max": [
+   11.3,
+   24.3,
+   70.3
+  ],
+  "static": true
+ },
+ "models/props_wasteland/laundry_dryer001.mdl": {
+  "min": [
+   -28.4,
+   -31.7,
+   -60.8
+  ],
+  "max": [
+   29.0,
+   30.2,
+   61.1
+  ],
+  "static": true
+ },
+ "models/props_junk/trashdumpster02.mdl": {
+  "min": [
+   -91.0,
+   -65.0,
+   -63.5
+  ],
+  "max": [
+   91.6,
+   64.6,
+   62.9
+  ],
+  "static": true
+ },
+ "models/props_vehicles/car002b.mdl": {
+  "min": [
+   -83.8,
+   -40.1,
+   -21.3
+  ],
+  "max": [
+   69.4,
+   44.3,
+   33.9
+  ],
+  "static": true
+ }
+}

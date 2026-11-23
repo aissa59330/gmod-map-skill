@@ -1,0 +1,17 @@
+OK models/fallout_4/landscape/plants/shrubgrouplarge04.mdl : 6332 -> LOD [2000, 1000, 400] (bascule 3576/8046) mats 3
+OK models/fallout_4/landscape/plants/shrubgrouplarge05.mdl : 6709 -> LOD [2000, 1000, 400] (bascule 2940/6616) mats 3
+OK models/fallout_4/landscape/plants/shrubgroupmedium03.mdl : 4384 -> LOD [2000, 1000, 400] (bascule 2707/6091) mats 3
+OK models/fallout_4/landscape/plants/shrubgroupmedium02.mdl : 3682 -> LOD [1999, 999, 400] (bascule 3146/7079) mats 3
+OK models/fallout_4/landscape/plants/shrubgroupsmall01.mdl : 3650 -> LOD [2000, 1000, 400] (bascule 2817/6339) mats 2
+OK models/niksacokica/imperial/imp_crate_02_x12.mdl : 3864 -> LOD [2000, 1000, 400] (bascule 1224/2754) mats 1
+OK models/niksacokica/imperial/imp_crate_02_x08.mdl : 2576 -> LOD [2000, 1000, 400] (bascule 816/1836) mats 1
+OK models/niksacokica/imperial/imp_crate_02_x05.mdl : 1610 -> LOD [1610, 805, 322] (bascule 1224/2754) mats 1
+OK models/niksacokica/imperial/imp_crate_02_x04.mdl : 1288 -> LOD [1288, 644, 257] (bascule 815/1834) mats 1
+OK models/niksacokica/containers/con_box_crate_06.mdl : 5032 -> LOD [1999, 999, 400] (bascule 496/1117) mats 1
+OK models/niksacokica/containers/con_box_crate_02.mdl : 5032 -> LOD [1999, 999, 400] (bascule 496/1117) mats 1
+OK models/niksacokica/tech/tech_droid_pod.mdl : 2701 -> LOD [2000, 1000, 400] (bascule 2265/5097) mats 2
+OK models/niksacokica/tech/tech_huge_generator.mdl : 2724 -> LOD [1999, 999, 400] (bascule 1548/3483) mats 2
+OK models/niksacokica/tech/tech_mine_barrel.mdl : 1536 -> LOD [1536, 768, 307] (bascule 585/1317) mats 2
+OK models/niksacokica/containers/crate_weapon_01.mdl : 1366 -> LOD [1366, 683, 273] (bascule 300/700) mats 1
+OK models/niksacokica/construction/construction_storage_compactor_01.mdl : 1601 -> LOD [1601, 800, 320] (bascule 606/1364) mats 1
+OK models/niksacokica/containers/con_crate_shipping02.mdl : 708 -> LOD [708, 354, 141] (bascule 853/1920) mats 1

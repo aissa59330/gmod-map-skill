@@ -13,7 +13,7 @@ import re
 
 ENABLED = True
 HERE = os.path.dirname(os.path.abspath(__file__))
-VEXIS = os.path.join(os.path.dirname(os.path.dirname(HERE)), "gmod_arsenal_vexis")
+VEXIS = os.path.join(HERE, "vexis_data")            # données de Vexis copiées dans le skill (autonome)
 
 # ---------- textures (murs, sols, toits) ----------
 MAT_REMAP = {
@@ -107,11 +107,11 @@ PROP_SWAP = {
 }
 
 # tailles des modèles Vexis (même fichier que le générateur de Vexis)
-VEXIS_BOUNDS = json.load(open(os.path.join(VEXIS, "generator", "prop_bounds.json"), encoding="utf-8"))
+VEXIS_BOUNDS = json.load(open(os.path.join(VEXIS, "prop_bounds.json"), encoding="utf-8"))
 
 # modèles qui ont une version LOD allégée (faite pour Vexis) : models/vxl/<nom>.mdl
 LOD = set(re.findall(r"^OK (models/\S+\.mdl) :",
-                     open(os.path.join(VEXIS, "assets", "lod_props", "lod_report.txt"), encoding="utf-8").read(), re.M))
+                     open(os.path.join(VEXIS, "lod_report.txt"), encoding="utf-8").read(), re.M))
 
 
 def swap(model):
