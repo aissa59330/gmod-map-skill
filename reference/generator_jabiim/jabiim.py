@@ -26,7 +26,6 @@ from vx import M, MDL, NIK, round_hall, cooling_tower, chimney, silo, vault_hall
 
 R = VX.R
 XA, XB, YA, YB = -15872, 15872, -15872, 15872
-HORIZON_Z = 96                             # hauteur de la plaine au-delà du mur = sol du ciel 3D (raccord invisible)
 PX, PY = 13824, 13824                     # mur invisible sur les 4 côtés
 FLOOR, CEIL = -1600, 4096                 # la mine descend à ~ -1200
 CAVE_DZ = -3840                           # cavernes sous la map
@@ -1147,81 +1146,6 @@ def outposts(v):
         used[sc] += 1
 
 
-VEG_KEYS = ("foliage", "tallgrass", "rock", "shrub", "tree", "plants", "boulder", "landscape")
-
-
-def filler(v):
-    """Comble les bouts de map vides : pour chaque point d'un disque de Poisson (pas 1700) loin des routes, des zones et
-    des props déjà posés, un avant-poste (props) ou une petite bâtisse meublée (murs axiaux, toit plat : peu de plans).
-    Tirage propre (le reste de la map ne bouge pas)."""
-    global R
-    t = v.t
-    saved, L = R, IN.srng("remplissage")
-    R = L
-    try:
-        built = [p[1] for p in v.props if not any(k in p[0].lower() for k in VEG_KEYS)]
-        cell = {}
-        for (x, y, _z) in built:
-            cell.setdefault((int(x // 800), int(y // 800)), []).append((x, y))
-
-        def crowded(x, y, r):
-            for i in range(int((x - r) // 800), int((x + r) // 800) + 1):
-                for j in range(int((y - r) // 800), int((y + r) // 800) + 1):
-                    if any(math.hypot(px - x, py - y) < r for (px, py) in cell.get((i, j), ())):
-                        return True
-            return False
-
-        kinds = {1: ["cabane", "checkpoint", "cache", "remise", "observation_rep", "cabane"],
-                 2: ["atelier", "relais_sep", "cache", "sniper_sep", "cabane", "relais_sep"],
-                 3: ["ruine", "medical", "sniper_sep", "observation_rep", "ruine", "cache"]}
-        rnd = __import__("random").Random(77)
-        pts = poisson(-PX + 900, -PY + 900, PX - 900, PY - 900, 1500, rnd)
-        rnd.shuffle(pts)
-        n = {"bati": 0, "poste": 0, "refus": {}}
-        k_sec = {1: 0, 2: 0, 3: 0}
-        for (x, y) in pts:
-            sc = sector(x, y)
-            why_ = ("zone" if in_zone(v, x, y, 450) else "piste" if t.on_track(x, y, 500) else "pente" if t.slope(x, y) > 0.25
-                    else "props" if crowded(x, y, 520) else "mine" if math.hypot(x - PIT[0], y - PIT[1]) < PIT_R + 500
-                    else "puits" if any(math.hypot(x - hx - 512, y - hy - 512) < 1400 for (hx, hy) in SHAFTS.values()) else None)
-            if why_:
-                n["refus"][why_] = n["refus"].get(why_, 0) + 1
-                continue
-            kind = kinds[sc][k_sec[sc] % len(kinds[sc])]
-            k_sec[sc] += 1
-            if kind in ("cabane", "remise", "atelier", "ruine"):
-                if n["bati"] >= 20:
-                    kind = kinds[sc][1]
-                else:
-                    yaw = L.choice((0, 90, 180, 270))
-                    mat = L.choice([M["conc2"], M["dirty"], "plaster/plasterwall030a", M["wall2"]])
-                    if kind == "cabane":
-                        house(v, x, y, 448, 384, yaw, state=L.choice(["intact", "endommage"]), kind="maison", roof_kind="flat",
-                              wall=mat, roof=M["hull3"])
-                    elif kind == "remise":
-                        house(v, x, y, 512, 448, yaw, state="intact", kind="epicerie", roof_kind="flat", wall=mat,
-                              roof=M["hull3"], door=(224, 192))
-                    elif kind == "atelier":
-                        house(v, x, y, 640, 512, yaw, state=L.choice(["intact", "endommage"]), kind="atelier",
-                              roof_kind="flat", wall=M["dirty"], roof=M["hull3"], door=(320, 224))
-                    else:
-                        house(v, x, y, 512, 448, yaw, state="ruine", kind="maison", roof_kind="flat", wall=mat, roof=M["hull3"])
-                    c, s_ = math.cos(math.radians(yaw)), math.sin(math.radians(yaw))
-                    for (lx, ly) in ((-360, -320), (380, 260)):            # abords : caisses, fûts, barricade
-                        v.prop(L.choice(CRATES[:2] + [NIK + "tech/tech_mine_barrel.mdl"]), x + lx * c - ly * s_,
-                               y + lx * s_ + ly * c, L.uniform(0, 360), why="avant_poste")
-                    if sc == 3 or L.random() < 0.4:
-                        v.prop(BARR, x - 420 * s_, y + 420 * c, yaw, why="avant_poste")
-                    zone(v, x - 420, y - 420, x + 420, y + 420, "remplissage")
-                    n["bati"] += 1
-                    continue
-            outpost(v, x, y, kind)
-            n["poste"] += 1
-        STATS["remplissage"] = n
-    finally:
-        R = saved
-
-
 def landmark(v, kind, x, y, yaw):
     """Bâtiments qui structurent le village (uniques, travaillés, accessibles)."""
     t = v.t
@@ -1582,86 +1506,11 @@ def farm(v, x, y, yaw, name):
     STATS["fermes"] = STATS.get("fermes", 0) + 1
 
 
-CITY = (6650, 6050, 700, 5, 6)           # Choal : origine de la grille, pas, colonnes, rangées (nord-est des plaines)
-
-
-def city(v):
-    """Ville de Choal (retour de la v8, en léger) : grille droite (bâtiments à 0/90/180/270°, toits plats = brushes axiaux,
-    presque sans coût en plans), immeubles à étage meublés (moteur d'intérieurs), boutiques, ateliers, place centrale,
-    rues asphaltées peintes sur le terrain (aucun plan). Tirage propre : rien d'autre ne bouge dans la map."""
-    global R
-    t = v.t
-    gx, gy, cell, nc, nr = CITY
-    x0, y0 = gx - cell / 2, gy - cell / 2
-    x1, y1 = x0 + nc * cell, y0 + nr * cell
-    saved, L = R, IN.srng("ville_choal")
-    R = L                                                   # house() tire dans R : on lui prête le tirage de la ville
-    try:
-        zc = t.h((x0 + x1) / 2, (y0 + y1) / 2)
-        t.flat_rect(x0 - 200, y0 - 200, x1 + 200, y1 + 200, zc, 900)
-        t.regions.insert(0, (lambda x, y: x0 - 120 < x < x1 + 120 and y0 - 120 < y < y1 + 120, ROAD))
-        cx_, cy_ = gx + (nc // 2) * cell, gy + (nr // 2) * cell             # place centrale
-        mats = [M["conc2"], M["dirty"], "plaster/plasterwall030a", M["wall2"], M["pk"]]
-        placed = 0
-        for i in range(nc):
-            for j in range(nr):
-                x, y = gx + i * cell, gy + j * cell
-                if (i, j) == (nc // 2, nr // 2):
-                    continue
-                hit = next((z[4] for z in v.zones if z[4] != "ville" and z[0] - 320 <= x <= z[2] + 320 and z[1] - 320 <= y <= z[3] + 320), None)
-                why_ = ("zone:" + hit if hit else "piste" if t.on_track(x, y, 420) else "secteur" if sector(x, y) != 1 else None)
-                if why_:
-                    STATS.setdefault("ville_refus", {}).setdefault(why_, 0)
-                    STATS["ville_refus"][why_] += 1
-                    continue
-                w, d = L.choice([(576, 512), (512, 512), (640, 512), (576, 448)])
-                # façade vers la place si on est sur le pourtour de la place, sinon vers le sud ou le nord (rue)
-                if abs(i - nc // 2) <= 1 and abs(j - nr // 2) <= 1:
-                    dx, dy = cx_ - x, cy_ - y
-                    yaw = (90 if dx < 0 else 270) if abs(dx) > abs(dy) else (180 if dy < 0 else 0)
-                else:
-                    yaw = L.choice((0, 180, 90, 270))
-                kind = L.choices(["maison", "epicerie", "atelier"], [0.6, 0.25, 0.15])[0]
-                state = L.choices(["intact", "endommage"], [0.8, 0.2])[0]
-                if kind == "maison":
-                    house(v, x, y, w, d, yaw, state=state, floors=2, kind="maison", roof_kind="flat", wall=L.choice(mats),
-                          roof=M["hull3"])
-                elif kind == "epicerie":
-                    house(v, x, y, w, d, yaw, state=state, kind="epicerie", roof_kind="flat", wall=L.choice(mats),
-                          roof=M["hull3"], door=(224, 192))
-                else:
-                    house(v, x, y, max(w, 640), d, yaw, state=state, kind="atelier", roof_kind="flat", wall=L.choice(mats),
-                          roof=M["hull3"], door=(320, 224))
-                zone(v, x - 340, y - 340, x + 340, y + 340, "ville")
-                placed += 1
-        # place : statue, bancs, bannière ; lampadaires aux carrefours ; barricades aux entrées
-        v.prop(VG.md("city_statue_jedi") if "city_statue_jedi" in VG.IDX else FLAG, cx_, cy_, 180, why="ville")
-        for (dx, dy, a) in ((-220, 0, 90), (220, 0, 270), (0, -220, 0), (0, 220, 180)):
-            v.prop(NIKC + "city_furn_bench_metal.mdl", cx_ + dx, cy_ + dy, a, why="ville")
-        for i in range(nc + 1):
-            for j in range(nr + 1):
-                lx, ly = x0 + i * cell, y0 + j * cell
-                if L.random() < 0.55 and not t.on_track(lx, ly, 150):
-                    v.prop(NIK + "republic/rep_lamppost.mdl", lx + 40, ly + 40, 0, why="ville")
-                    if L.random() < 0.35:
-                        v.light(lx + 40, ly + 40, zc + 120, "255 225 180 120")
-        for (bx, by, a) in ((x0 - 60, (y0 + y1) / 2, 90), (x1 + 60, (y0 + y1) / 2, 90), ((x0 + x1) / 2, y0 - 60, 0)):
-            v.prop(BARR, bx, by, a, why="ville")
-            v.prop(L.choice(CRATES[:2]), bx + 140, by + 90, L.uniform(0, 360), why="ville")
-        zone(v, x0 - 150, y0 - 150, x1 + 150, y1 + 150, "ville")
-        v.info["VILLE DE CHOAL"] = ((x0 + x1) / 2, y1 + 300)
-        v.info["Place de Choal"] = (cx_, cy_)
-        STATS["ville_choal"] = placed
-    finally:
-        R = saved
-
-
 def plains(v, road_pts):
     village(v, road_pts)
     for (x, y, yaw, nm) in ((-9800, 8600, 15, "Ferme Lars"), (-6200, 11300, -20, "Ferme Kessel"), (4800, 8000, 40, "Ferme du gué"),
                             (9400, 10900, -10, "Ferme de la colline"), (-11400, 5600, 80, "Ferme de l'ouest")):
         farm(v, x, y, yaw, nm)
-    city(v)
     v.info["SECTEUR 1 — PLAINES DE JOBRETH"] = (0, 13300)
 
 
@@ -1893,7 +1742,6 @@ def build_all():
     caves(vc)
     shafts(v, vc)
     outposts(v)
-    filler(v)
     vegetation(v)
     battle_details(v, road_lines[0])
     v.resolve()
@@ -1929,18 +1777,9 @@ def shafts(v, vc):
         zone(v, hx - 700, hy - 700, hx + 1724, hy + 1724, "puits")
         v.clear.append((cx, cy, 1200))
         v.w.carve.append((hx, hy, FLOOR - 64, hx + 1024, hy + 1024, FLOOR + 64))
-        bands = [M["conc2"], M["dirty"], M["wall2"], M["conc"]]      # parois par bandes de 512 (moins répétitif)
-        zb = FLOOR
-        k = 0
-        while zb < zs + 16:
-            zt = min(zs + 16, zb + 512)
-            # parois DANS la case du puits (32 d'épaisseur) : posées sur la limite de case, leur face coïncidait avec
-            # celle des bloqueurs nodraw du terrain voisin -> vbsp gardait la face invisible (puits « ouverts » sur le vide)
-            for b in ((hx, hy, hx + 1024, hy + 32), (hx, hy + 992, hx + 1024, hy + 1024),
-                      (hx, hy + 32, hx + 32, hy + 992), (hx + 992, hy + 32, hx + 1024, hy + 992)):
-                v.blk((b[0], b[1], zb, b[2], b[3], zt), bands[(k + len(name)) % len(bands)], kind="world",
-                      top=M["hazard"] if zt == zs + 16 else None)
-            zb, k = zt, k + 1
+        for b in ((hx - 64, hy - 64, hx + 1088, hy), (hx - 64, hy + 1024, hx + 1088, hy + 1088),
+                  (hx - 64, hy, hx, hy + 1024), (hx + 1024, hy, hx + 1088, hy + 1024)):
+            v.blk((b[0], b[1], FLOOR, b[2], b[3], zs + 16), M["conc2"], kind="world", top=M["hazard"])
         for (a0, b0, a1, b1) in ((hx - 448, hy - 448, hx + 1472, hy - 64), (hx - 448, hy + 1088, hx + 1472, hy + 1472),
                                  (hx - 448, hy - 64, hx - 64, hy + 1088), (hx + 1088, hy - 64, hx + 1472, hy + 1088)):
             v.blk((a0, b0, zs - 48, a1, b1, zs + 16), M["conc"], ground=True, obst=False)
@@ -1969,7 +1808,6 @@ def shafts(v, vc):
         vc.w.carve.append((hx, hy, FLOOR - CAVE_DZ - 64, hx + 1024, hy + 1024, top_local + 900))
         vc.add(S.cylinder(cx, cy, 200, 0, top_local, M["rock"], "world", 8))
         spiral(vc, cx, cy, top_local, 16)
-        shaft_dressing(v, vc, name, hx, hy, top_local)
         for (r, ct) in vc.cave_t:
             if r[0] <= cx <= r[2] and r[1] <= cy <= r[3]:
                 ct.flat_rect(hx - 128, hy - 128, hx + 1152, hy + 1152, 8, 500)
@@ -1998,61 +1836,6 @@ def shafts(v, vc):
                                   NIKR + "rep_pallet_02.mdl"]), x0g + 500 + k * 1250, gy0 + 90, R.uniform(-15, 15), why="galerie")
             v.info["Galerie de roulage (sous la mine) -> cavernes"] = (3000, 1900)
     STATS["puits"] = len(SHAFTS)
-
-
-def shaft_dressing(v, vc, name, hx, hy, top_local):
-    """Habillage de la descente : un palier sur deux, une façade de station dans la paroi (porte blindée encadrée,
-    fenêtre sombre ou poste de contrôle), ceintures d'étayage, conduites, lumières. Brushes droits + props : peu de plans.
-    Uniquement dans la partie haute (monde de surface) et, pour le puits de la mine, jusqu'en bas (pas de caverne dessous)."""
-    cx, cy = hx + 512, hy + 512
-    corners = [(1, 1), (1, -1), (-1, -1), (-1, 1)]
-    rng = IN.srng("puits", name)
-    k, z = 0, top_local
-    while z >= 16:
-        wz = z + CAVE_DZ                                    # altitude monde du palier
-        c = corners[k % 4]
-        if k > 0 and k % 2 == 0 and (wz > FLOOR + 32 or name == "mine"):
-            W, dz_ = (v, 0) if wz > FLOOR + 32 else (vc, CAVE_DZ)
-            zl = wz - dz_                                   # altitude dans le monde qui reçoit la façade
-            fx = cx + c[0] * 480                            # paroi est/ouest derrière le palier (face intérieure)
-            fy = cy + c[1] * 352
-            face = 180 if c[0] > 0 else 0                   # l'avant des modèles regarde l'axe du puits
-            inn = -c[0]                                     # direction vers l'intérieur
-            kind = ("porte", "fenetre", "poste")[(k // 2 + len(name)) % 3]
-            if kind == "porte":
-                for dy in (-78, 78):                        # chambranle
-                    W.blk((min(fx, fx + inn * 20), fy + dy - 12, zl, max(fx, fx + inn * 20), fy + dy + 12, zl + 140), M["trim"])
-                W.blk((min(fx, fx + inn * 20), fy - 90, zl + 140, max(fx, fx + inn * 20), fy + 90, zl + 164), M["trim"])
-                W.prop(NIK + "tech/tech_reinforced_door.mdl", fx + inn * 10, fy, face, z=zl, check=False, why="puits")
-                W.prop(NIK + "imperial/imp_wall_light.mdl", fx + inn * 12, fy, face, z=zl + 190, check=False, why="puits")
-                W.prop(NIK + "republic/rep_console02.mdl", fx + inn * 40, fy + c[1] * -120, face, z=zl, check=False, why="puits")
-            elif kind == "fenetre":                         # fenêtre sombre encadrée (une pièce derrière la paroi)
-                W.blk((min(fx, fx + inn * 4), fy - 100, zl + 60, max(fx, fx + inn * 4), fy + 100, zl + 180), "tools/toolsblack",
-                      obst=False)
-                for (y0_, y1_, z0_, z1_) in ((fy - 112, fy + 112, zl + 48, zl + 60), (fy - 112, fy + 112, zl + 180, zl + 192),
-                                             (fy - 112, fy - 100, zl + 60, zl + 180), (fy + 100, fy + 112, zl + 60, zl + 180)):
-                    W.blk((min(fx, fx + inn * 16), y0_, z0_, max(fx, fx + inn * 16), y1_, z1_), M["trim"], obst=False)
-                W.prop(NIK + "city/city_wall_light.mdl", fx + inn * 6, fy + c[1] * -150, face, z=zl + 210, check=False, why="puits")
-            else:                                           # poste : caisses, console, panneau de commande
-                W.prop(NIK + "tech/tech_controlpanel_wall01_damaged.mdl", fx + inn * 22, fy, face, z=zl + 120, check=False,
-                       why="puits")
-                W.prop(rng.choice([NIK + "containers/con_box_crate_02.mdl", NIKR + "rep_crate.mdl"]), fx + inn * 50, fy + c[1] * 90,
-                       rng.uniform(0, 360), z=zl, check=False, why="puits")
-                W.prop(NIK + "tech/tech_mine_barrel.mdl", fx + inn * 40, fy - c[1] * 90, 0, z=zl, check=False, why="puits")
-            if k % 4 == 0:
-                W.light(cx + c[0] * 352, cy + c[1] * 352, zl + 150, "255 196 140 170")
-        if k % 3 == 1:                                      # ceinture d'étayage (quatre poutres contre les parois)
-            wz2 = z + CAVE_DZ + 230
-            W2, d2 = (v, 0) if wz2 > FLOOR + 32 else (vc, CAVE_DZ)
-            zl2 = wz2 - d2
-            if wz2 > FLOOR + 32 or name == "mine":
-                for b in ((hx + 32, hy + 32, hx + 992, hy + 56), (hx + 32, hy + 968, hx + 992, hy + 992),
-                          (hx + 32, hy + 32, hx + 56, hy + 992), (hx + 968, hy + 32, hx + 992, hy + 992)):
-                    W2.blk((b[0], b[1], zl2, b[2], b[3], zl2 + 32), "wood/woodwall009a", obst=False)
-        z -= 192
-        k += 1
-    for (px, py) in ((hx + 32, hy + 300), (hx + 976, hy + 700)):          # conduites verticales le long des parois
-        v.blk((px, py, FLOOR, px + 16, py + 16, top_local + CAVE_DZ - 32), M["trim"], obst=False)
 
 
 def spiral(v, cx, cy, ztop, zbot):

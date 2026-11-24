@@ -26,7 +26,7 @@ MAP = "rp_cw_battle_of_jabiim"
 SKY = "sky_day03_04"                # ciel d orage lourd (brief : ciel lourd, humide)
 # Nœuds PNJ (info_node) désactivés comme sur Vexis ; positions praticables exportées pour le bench serveur.
 WITH_NODES = False
-LOD = set(re.findall(r"^OK (models/\S+\.mdl) :", open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "generator_tf", "vexis_data",
+LOD = set(re.findall(r"^OK (models/\S+\.mdl) :", open(os.path.join(ROOT, "..", "gmod_arsenal_vexis", "assets", "lod_props",
                                                                     "lod_report.txt"), encoding="utf-8").read(), re.M))
 
 
@@ -51,7 +51,6 @@ def shift_world(w, dz):
     for s in w.spaces:
         b = s.box
         s.box = (b[0], b[1], b[2] + dz, b[3], b[4], b[5] + dz)
-    w.carve = [(b[0], b[1], b[2] + dz, b[3], b[4], b[5] + dz) for b in w.carve]   # sinon le fond des puits reste bouché
 
     def sh(b):
         if isinstance(b, Block):
